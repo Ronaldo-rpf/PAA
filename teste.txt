@@ -1,0 +1,110 @@
+// Conexões do motor A
+#define enA 6
+#define in1 7
+#define in2 12
+
+// Conexões do motor B
+#define enB 5
+#define in4 8
+#define in3 13
+
+enum Estado {
+  PARAR,
+  FRENTE,
+  TRAS,
+  ESQUERDA,
+  DIREITA
+  };
+
+void definirVelocidade(byte valorA, byte valorB = 0) {
+  if (valorB == 0) {
+    valorB = valorA;
+  }
+
+  analogWrite(enA, valorB);
+  analogWrite(enB, valorA);
+}
+
+// Define um estado por um tempo específico
+void definirEstado(Estado valor, unsigned long duracao = 0) {
+  switch (valor) {
+    case PARAR:
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, LOW);
+    Serial.println("PARAR");
+    break;
+    
+    case FRENTE:
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+    Serial.println("FRENTE");
+    break;
+    
+    case TRAS:
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
+    Serial.println("TRÁS");
+    break;
+    
+    case ESQUERDA:
+    delay(1500);
+    definirVelocidade(100);
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
+    Serial.println("ESQUERDA");
+    break;
+    
+    case DIREITA:
+    delay(1500);
+    definirVelocidade(100);
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+    Serial.println("DIREITA");
+    break;
+    
+    default:
+    return;
+  }
+  
+  if (duracao > 0) {
+    delay(duracao);
+    definirEstado(PARAR);
+  }
+
+    delay(1500);
+}
+
+void setup() {
+  Serial.begin(9600);
+  
+  pinMode(enA, OUTPUT);
+  pinMode(enB, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
+  
+  // Desliga ambos os motores (estado inicial)
+  definirVelocidade(150);
+  definirEstado(PARAR);
+  
+  // Sequência de movimentos únicos aqui:
+  definirVelocidade(100, 40);
+  definirEstado(FRENTE);
+}
+
+void loop() {
+  // Sequência de movimentos repetidos aqui:
+  //definirEstado(FRENTE, 500);
+  //definirEstado(DIREITA, 375);
+}

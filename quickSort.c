@@ -47,7 +47,7 @@ void quicksort(int *vet, int esq, int dir){
 }
 
 int particiona (int *vet, int esq, int dir){
-    decidePivo(vet, esq, dir);
+    //decidePivo(vet, esq, dir);
     int pivo = vet[esq];
     int left = esq + 1;
     int right = dir;
