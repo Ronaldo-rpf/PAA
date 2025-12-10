@@ -1,0 +1,20 @@
+# Número de linhas L e número de estações N
+2 4
+
+# Tempos de produção a[i][j] (Linha 1 e Linha 2)
+7 5 4 8
+5 5 9 3
+
+# Tempos de transporte NA MESMA LINHA (da estação j para j+1)
+1 2 1
+1 2 2
+
+# Tempos de transporte TROCANDO DE LINHA (de linha i para outra linha)
+1 1 2
+1 2 1
+
+# Tempos de entrada e[i]
+3 4
+
+# Tempos de saída x[i]
+4 3

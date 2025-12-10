@@ -110,7 +110,7 @@ def constroiHeap(vetor, tam):
     # Isolando o "indexHeap": 
     # 4*indexHeap - 4 <= tam - 2
     # 4*indexHeap <= tam + 2
-    # indexHeap <= (tam + 2) / 4
+    # indexHeap <= (tam + 2) / 4 
     for x in range((tam + 2)//4, 0, -1):
         sift(vetor, x-1, tam)
 
